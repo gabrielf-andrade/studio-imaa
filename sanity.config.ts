@@ -10,7 +10,7 @@ const singletonTypes = new Set(['siteSettings', 'homePage'])
 
 export default defineConfig({
   name: 'default',
-  title: 'studio-instituto-maestro-abiud-almeida',
+  title: 'studio-imaa',
 
   projectId: 'ofh08t2n',
   dataset: 'production',

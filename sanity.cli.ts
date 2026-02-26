@@ -17,9 +17,9 @@ export default defineCliConfig({
      * Generate types for the Sanity schema and queries
      * THE FRONTEND FOLDER MUST BE IN THE SAME DIRECTORY AS THE STUDIO
      */
-    path: ['./schemaTypes/**/*.{ts,tsx}', '../trapia-astro/src/lib/queries/**/*.{ts,tsx,astro}'],
+    path: ['./schemaTypes/**/*.{ts,tsx}', '../astro-imaa/src/lib/queries/**/*.{ts,tsx,astro}'],
     schema: 'schema.json',
-    generates: '../trapia-astro/src/lib/sanity.types.ts',
+    generates: '../astro-imaa/src/lib/sanity.types.ts',
     overloadClientMethods: true,
   },
 })

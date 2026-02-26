@@ -78,7 +78,7 @@ export const pageBuilderField = defineField({
   type: 'array',
   group: 'content',
   options: {
-    layout: 'grid',
+    layout: 'list',
     insertMenu: {
       filter: true,
       views: [{name: 'list'}, {name: 'grid'}],
