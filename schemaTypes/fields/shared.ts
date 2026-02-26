@@ -1,5 +1,5 @@
 import {MdContentPaste, MdSearch} from 'react-icons/md'
-import {defineField, type FieldGroupDefinition} from 'sanity'
+import {defineArrayMember, defineField, type FieldGroupDefinition} from 'sanity'
 
 /**
  * Grupos padrão para documentos do tipo "página"
@@ -70,6 +70,70 @@ export const galleryField = defineField({
 })
 
 /**
+ * Campo de page builder - Array de blocos modulares para construção de páginas
+ */
+export const pageBuilderField = defineField({
+  name: 'pageBuilder',
+  title: 'Construtor de Página',
+  type: 'array',
+  group: 'content',
+  options: {
+    layout: 'grid',
+    insertMenu: {
+      filter: true,
+      views: [{name: 'list'}, {name: 'grid'}],
+    },
+  },
+  of: [
+    defineArrayMember({
+      name: 'hero',
+      title: 'Hero',
+      type: 'hero',
+    }),
+    defineArrayMember({
+      name: 'textWithIllustration',
+      title: 'Texto com Ilustração',
+      type: 'textWithIllustration',
+    }),
+    defineArrayMember({
+      name: 'gallery',
+      title: 'Galeria de Imagens',
+      type: 'gallery',
+    }),
+    defineArrayMember({
+      name: 'videoFile',
+      title: 'Vídeo (Arquivo)',
+      type: 'videoFile',
+    }),
+    defineArrayMember({
+      name: 'youtubeEmbed',
+      title: 'YouTube Embed',
+      type: 'youtubeEmbed',
+    }),
+    defineArrayMember({
+      name: 'downloadableFile',
+      title: 'Link para PDF',
+      type: 'downloadableFile',
+    }),
+    defineArrayMember({
+      name: 'form',
+      title: 'Formulário',
+      type: 'form',
+    }),
+    defineArrayMember({
+      name: 'callToAction',
+      title: 'Chamada para Ação (CTA)',
+      type: 'callToAction',
+    }),
+    defineArrayMember({
+      name: 'horizontalRule',
+      title: 'Linha Horizontal',
+      type: 'horizontalRule',
+    }),
+  ],
+})
+
+/**
  * Campo de resumo para SEO e listas
  */
 export const excerptField = defineField({
@@ -93,6 +157,6 @@ export const basePageFields = [
   slugField(),
   featuredImageField,
   contentField,
-  galleryField,
+  pageBuilderField,
   excerptField,
 ]

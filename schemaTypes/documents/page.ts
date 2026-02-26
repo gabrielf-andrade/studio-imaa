@@ -14,11 +14,16 @@ export default defineType({
       title: 'title',
       slug: 'slug.current',
       media: 'featuredImage',
+      blocks: 'pageBuilder',
     },
-    prepare({title, slug, media}) {
+    prepare({title, slug, media, blocks}) {
+      const blockCount = blocks?.length || 0
+      const blockLabel = blockCount === 1 ? 'bloco' : 'blocos'
       return {
         title,
-        subtitle: slug ? `/${slug}` : '(sem URL)',
+        subtitle: slug
+          ? `/${slug} · ${blockCount} ${blockLabel}`
+          : `(sem URL) · ${blockCount} ${blockLabel}`,
         media: media?.asset ? media : MdInsertDriveFile,
       }
     },
