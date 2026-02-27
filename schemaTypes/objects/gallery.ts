@@ -1,5 +1,5 @@
 import {MdPhotoLibrary} from 'react-icons/md'
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'gallery',
@@ -8,63 +8,63 @@ export default defineType({
   icon: MdPhotoLibrary,
   fields: [
     defineField({
-      name: 'title',
-      title: 'Título da Galeria',
+      name: 'heading',
+      title: 'Título',
       type: 'string',
+      description: 'Opcional.',
+    }),
+    defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Grid 2 colunas', value: 'grid2'},
+          {title: 'Grid 3 colunas', value: 'grid3'},
+          {title: 'Masonry', value: 'masonry'},
+          {title: 'Carrossel', value: 'carousel'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'grid3',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'images',
       title: 'Imagens',
       type: 'array',
-      options: {
-        layout: 'grid',
-      },
       of: [
-        {
+        defineArrayMember({
           type: 'image',
-          options: {
-            hotspot: true,
-          },
+          options: {hotspot: true},
           fields: [
             defineField({
               name: 'alt',
               title: 'Texto Alternativo',
               type: 'string',
-              description: 'Descrição para acessibilidade (obrigatório se a imagem for enviada)',
-              validation: (Rule) =>
-                Rule.custom((value, context) => {
-                  const parent = context.parent as {asset?: any}
-                  if (parent?.asset && !value) {
-                    return 'O texto alternativo é obrigatório.'
-                  }
-                  return true
-                }),
+              description: 'Descrição da imagem para acessibilidade.',
             }),
             defineField({
               name: 'caption',
               title: 'Legenda',
               type: 'string',
-              description: 'Exibida como legenda da imagem na galeria (opcional).',
+              description: 'Opcional. Exibida no lightbox.',
             }),
           ],
-        },
+        }),
       ],
-      validation: (Rule) =>
-        Rule.required().min(1).error('Adicione pelo menos uma imagem à galeria.'),
+      validation: (Rule) => Rule.required().min(1),
     }),
   ],
   preview: {
-    select: {
-      title: 'title',
-      images: 'images',
-      media: 'images.0',
-    },
+    select: {title: 'heading', images: 'images', media: 'images.0'},
     prepare({title, images, media}) {
-      const imageCount = images?.length || 0
+      const count = images ? Object.keys(images).length : 0
       return {
-        title: title || 'Galeria sem título',
-        subtitle: `${imageCount} ${imageCount === 1 ? 'imagem' : 'imagens'}`,
-        media,
+        title: title || 'Galeria',
+        subtitle: `${count} image${count === 1 ? 'm' : 'ns'}`,
+        media: media || MdPhotoLibrary,
       }
     },
   },

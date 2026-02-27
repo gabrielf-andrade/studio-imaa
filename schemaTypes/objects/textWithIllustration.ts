@@ -1,27 +1,24 @@
-import {MdTextFields} from 'react-icons/md'
+import {MdViewSidebar} from 'react-icons/md'
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'textWithIllustration',
   title: 'Texto com Ilustração',
   type: 'object',
-  icon: MdTextFields,
+  icon: MdViewSidebar,
   fields: [
     defineField({
       name: 'heading',
       title: 'Título',
       type: 'string',
+      description: 'Opcional. Título da seção.',
     }),
     defineField({
-      name: 'tagline',
-      title: 'Subtítulo',
-      type: 'string',
-    }),
-    defineField({
-      name: 'excerpt',
-      title: 'Texto / Descrição',
+      name: 'text',
+      title: 'Parágrafo',
       type: 'text',
       rows: 4,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'image',
@@ -44,17 +41,29 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'imagePosition',
+      title: 'Posição da imagem',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Direita', value: 'right'},
+          {title: 'Esquerda', value: 'left'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'right',
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
-    select: {
-      title: 'heading',
-      image: 'image',
-    },
+    select: {title: 'heading', image: 'image'},
     prepare({title, image}) {
       return {
-        title: title || 'Texto com Ilustração sem título',
+        title: title || 'Texto com Ilustração',
         subtitle: 'Texto com Ilustração',
-        media: image || MdTextFields,
+        media: image || MdViewSidebar,
       }
     },
   },

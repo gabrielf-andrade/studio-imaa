@@ -11,9 +11,7 @@ export default defineType({
       name: 'file',
       title: 'Arquivo de Vídeo',
       type: 'file',
-      options: {
-        accept: 'video/mp4,video/webm',
-      },
+      options: {accept: 'video/mp4,video/webm'},
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -21,12 +19,20 @@ export default defineType({
       title: 'Imagem de Capa (Poster)',
       type: 'image',
       options: {hotspot: true},
-      description: 'Thumbnail exibida antes do vídeo iniciar',
+      description: 'Thumbnail exibida antes do vídeo iniciar.',
     }),
     defineField({
       name: 'caption',
       title: 'Legenda',
       type: 'string',
+      description: 'Opcional. Exibida abaixo do vídeo.',
+    }),
+    defineField({
+      name: 'autoplay',
+      title: 'Reprodução automática',
+      type: 'boolean',
+      description: 'Se ativado, o vídeo inicia mudo e em loop automaticamente. Ignora o poster.',
+      initialValue: false,
     }),
   ],
   preview: {
