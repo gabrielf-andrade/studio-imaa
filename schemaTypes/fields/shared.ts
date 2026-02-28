@@ -54,24 +54,14 @@ export const heroField = (group: string = 'hero') =>
 /**
  * Campo de imagem destacada (usa o objeto customizado featuredImage)
  */
-export const featuredImageField = (group: string = 'content') =>
+export const featuredImageField = (group: string = 'seo') =>
   defineField({
     name: 'featuredImage',
     title: 'Imagem Destacada',
     type: 'featuredImage',
     group,
-    description: 'Imagem principal que aparece no topo',
-  })
-
-/**
- * Campo de conteúdo Portable Text
- */
-export const contentField = (group: string = 'content') =>
-  defineField({
-    name: 'content',
-    title: 'Corpo do Conteúdo',
-    type: 'blockContent',
-    group,
+    description:
+      'Usada como imagem de pré-visualização ao compartilhar em redes sociais. Se "Exibir na página" estiver ativado, aparece abaixo do título da página.',
   })
 
 /**
@@ -101,6 +91,11 @@ export const pageBuilderField = defineField({
     },
   },
   of: [
+    defineArrayMember({
+      name: 'richText',
+      title: 'Texto Rico',
+      type: 'richText',
+    }),
     defineArrayMember({
       name: 'textWithIllustration',
       title: 'Texto com Ilustração',
@@ -135,13 +130,15 @@ export const pageBuilderField = defineField({
 export const excerptField = (group: string = 'seo') =>
   defineField({
     name: 'excerpt',
-    title: 'Resumo / Sinopse',
+    title: 'Descrição para SEO',
     type: 'text',
-    group,
     rows: 3,
-    description: 'Usado para SEO e listagens automáticas.',
-    validation: (Rule) =>
-      Rule.max(160).warning('O ideal é manter abaixo de 160 caracteres para melhor SEO.'),
+    group,
+    validation: (Rule) => [
+      Rule.required().error('A descrição para SEO é obrigatória.'),
+      Rule.max(160).warning('Recomendado até 160 caracteres para melhor SEO.'),
+    ],
+    description: 'Resumo exibido em buscadores e redes sociais. Máximo 160 caracteres.',
   })
 
 /**
@@ -154,7 +151,6 @@ export const basePageFields = [
   slugField(),
   heroField(),
   featuredImageField(),
-  contentField(),
   excerptField(),
   pageBuilderField,
 ]

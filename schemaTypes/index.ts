@@ -11,6 +11,7 @@ import hero from './objects/hero'
 import horizontalRule from './objects/horizontalRule'
 import menu from './objects/menu'
 import menuItem from './objects/menuItem'
+import richText from './objects/richText'
 import socialLinks from './objects/socialLinks'
 import textWithIllustration from './objects/textWithIllustration'
 import videoFile from './objects/videoFile'
@@ -20,6 +21,7 @@ export const schemaTypes = [
   menu,
   menuItem,
   hero,
+  richText,
   textWithIllustration,
   gallery,
   featuredImage,

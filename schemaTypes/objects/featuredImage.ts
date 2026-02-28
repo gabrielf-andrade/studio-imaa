@@ -25,6 +25,13 @@ export default defineType({
           return true
         }),
     }),
+    defineField({
+      name: 'showInPage',
+      title: 'Exibir na página',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Se ativado, a imagem aparece abaixo do título da página.',
+    }),
   ],
   preview: {
     select: {
