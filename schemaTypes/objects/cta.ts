@@ -11,7 +11,12 @@ export default defineType({
       name: 'label',
       title: 'Texto do Botão',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as {linkType?: string}
+          if (!value && parent?.linkType) return 'O texto do botão é obrigatório.'
+          return true
+        }),
     }),
     defineField({
       name: 'linkType',
@@ -25,8 +30,13 @@ export default defineType({
         layout: 'radio',
         direction: 'horizontal',
       },
-      initialValue: 'internal',
-      validation: (Rule) => Rule.required(),
+      initialValue: undefined,
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as {label?: string}
+          if (parent?.label && !value) return 'Selecione o tipo de link.'
+          return true
+        }),
     }),
     defineField({
       name: 'pageReference',
@@ -36,8 +46,9 @@ export default defineType({
       hidden: ({parent}) => (parent as {linkType?: string})?.linkType !== 'internal',
       validation: (Rule) =>
         Rule.custom((value, context) => {
-          const parent = context.parent as {linkType?: string}
-          if (parent?.linkType === 'internal' && !value) return 'Selecione uma página de destino.'
+          const parent = context.parent as {label?: string; linkType?: string}
+          if (parent?.label && parent?.linkType === 'internal' && !value)
+            return 'Selecione uma página de destino.'
           return true
         }),
     }),
@@ -50,8 +61,9 @@ export default defineType({
         Rule.uri({
           scheme: ['https', 'mailto', 'tel'],
         }).custom((value, context) => {
-          const parent = context.parent as {linkType?: string}
-          if (parent?.linkType === 'external' && !value) return 'Informe a URL externa.'
+          const parent = context.parent as {label?: string; linkType?: string}
+          if (parent?.label && parent?.linkType === 'external' && !value)
+            return 'Informe a URL externa.'
           return true
         }),
     }),
