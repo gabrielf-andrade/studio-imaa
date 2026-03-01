@@ -21,6 +21,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'cta',
+      title: 'Botão (CTA)',
+      type: 'cta',
+      description: 'Opcional. Botão de chamada para ação exibido abaixo do texto.',
+    }),
+    defineField({
       name: 'image',
       title: 'Imagem',
       type: 'image',
