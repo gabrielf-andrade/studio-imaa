@@ -5,6 +5,7 @@ import siteSettings from './documents/siteSettings'
 import transparencySection from './documents/transparencySection'
 import contactInfo from './objects/contactInfo'
 import cta from './objects/cta'
+import ctaSection from './objects/ctaSection'
 import downloadableFile from './objects/downloadableFile'
 import featuredImage from './objects/featuredImage'
 import gallery from './objects/gallery'
@@ -34,6 +35,7 @@ export const schemaTypes = [
   contactInfo,
   socialLinks,
   cta,
+  ctaSection,
   homePage,
   page,
   siteSettings,

@@ -1,5 +1,5 @@
 import {LuLayoutPanelTop} from 'react-icons/lu'
-import {MdContentPaste, MdSearch} from 'react-icons/md'
+import {MdAdsClick, MdContentPaste, MdSearch} from 'react-icons/md'
 import {defineArrayMember, defineField, type FieldGroupDefinition} from 'sanity'
 
 /**
@@ -100,6 +100,12 @@ export const pageBuilderField = defineField({
       name: 'textWithIllustration',
       title: 'Texto com Ilustração',
       type: 'textWithIllustration',
+    }),
+    defineArrayMember({
+      name: 'ctaSection',
+      title: 'Seção de Chamada para Ação',
+      type: 'ctaSection',
+      icon: MdAdsClick,
     }),
     defineArrayMember({
       name: 'gallery',
