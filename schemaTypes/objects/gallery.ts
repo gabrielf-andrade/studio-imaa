@@ -50,6 +50,9 @@ export default defineType({
       name: 'images',
       title: 'Imagens',
       type: 'array',
+      options: {
+        layout: 'grid',
+      },
       of: [
         defineArrayMember({
           type: 'image',
