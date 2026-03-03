@@ -3,6 +3,7 @@ import {visionTool} from '@sanity/vision'
 import {MdContactPage, MdHome, MdSettings} from 'react-icons/md'
 import {defineConfig} from 'sanity'
 import {media} from 'sanity-plugin-media'
+import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 
@@ -66,6 +67,11 @@ export default defineConfig({
     visionTool(),
     media(),
     ptBRLocale(),
+    webhooksTrigger({
+      title: 'Atualizar Site',
+      text: 'Fazer build do site na Cloudflare após alterações',
+      encryptionSalt: process.env.SANITY_WEBHOOK_SALT!,
+    }),
   ],
 
   schema: {

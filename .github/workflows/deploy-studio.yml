@@ -1,0 +1,40 @@
+name: Deploy Sanity Studio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'schemaTypes/**'
+      - 'sanity.config.ts'
+      - 'components/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy to Sanity
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+          SANITY_WEBHOOK_SALT: ${{ secrets.SANITY_WEBHOOK_SALT }}
+        run: pnpm sanity deploy --no-confirm
