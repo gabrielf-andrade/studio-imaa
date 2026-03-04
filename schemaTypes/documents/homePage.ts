@@ -1,5 +1,5 @@
 import {MdHome} from 'react-icons/md'
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 import {baseGroups, excerptField, titleField} from '../fields/shared'
 
 export default defineType({
@@ -54,6 +54,34 @@ export default defineType({
       title: 'Botão Secundário',
       type: 'cta',
       group: 'content',
+    }),
+    defineField({
+      name: 'socialGallery',
+      title: 'Galeria das Redes Sociais',
+      type: 'array',
+      group: 'content',
+      description: 'Imagens exibidas na seção de redes sociais da home.',
+      options: {layout: 'grid'},
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Texto Alternativo',
+              type: 'string',
+              description: 'Descrição da imagem para acessibilidade.',
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Legenda',
+              type: 'string',
+              description: 'Opcional.',
+            }),
+          ],
+        }),
+      ],
     }),
   ],
 })

@@ -36,17 +36,34 @@ export default defineType({
     }),
     defineField({
       name: 'label',
-      title: 'Rótulo (Opcional)',
-      description: 'Texto de acessibilidade (ex: "Siga-nos no Instagram")',
+      title: 'Handle / Nome do Perfil',
+      description:
+        'Handle ou nome do perfil exibido no site (ex: "@chora_bananeira" no Instagram, "@chorabananeira" no YouTube, "Bloco Chora Bananeira" no Facebook). Também usado como texto de acessibilidade.',
       type: 'string',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Imagem de Capa',
+      type: 'image',
+      options: {hotspot: true},
+      description:
+        'Imagem exibida na seção de redes sociais da home. Proporção quadrada recomendada.',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Texto Alternativo',
+          type: 'string',
+        }),
+      ],
     }),
   ],
   preview: {
     select: {
       platform: 'platform',
       url: 'url',
+      media: 'image',
     },
-    prepare({platform, url}: {platform?: string; url?: string}) {
+    prepare({platform, url}: {platform?: string; url?: string; media?: unknown}) {
       const displayPlatform = platform
         ? titleMap[platform as keyof typeof titleMap]?.title ||
           platform.charAt(0).toUpperCase() + platform.slice(1)
