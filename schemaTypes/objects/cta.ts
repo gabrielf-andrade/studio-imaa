@@ -42,7 +42,7 @@ export default defineType({
       name: 'pageReference',
       title: 'Página de Destino',
       type: 'reference',
-      to: [{type: 'page'}],
+      to: [{type: 'page'}, {type: 'homePage'}, {type: 'contactPage'}],
       hidden: ({parent}) => (parent as {linkType?: string})?.linkType !== 'internal',
       validation: (Rule) =>
         Rule.custom((value, context) => {

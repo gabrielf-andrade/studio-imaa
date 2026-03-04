@@ -53,8 +53,8 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Direita', value: 'right'},
           {title: 'Esquerda', value: 'left'},
+          {title: 'Direita', value: 'right'},
         ],
         layout: 'radio',
         direction: 'horizontal',

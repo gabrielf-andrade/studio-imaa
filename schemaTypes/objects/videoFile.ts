@@ -44,7 +44,7 @@ export default defineType({
       return {
         title: title || 'Vídeo',
         subtitle: 'Arquivo de vídeo',
-        media,
+        media: media || MdMovie,
       }
     },
   },
