@@ -1,13 +1,19 @@
-import {MdHome} from 'react-icons/md'
-import {defineArrayMember, defineField, defineType} from 'sanity'
-import {baseGroups, excerptField, titleField} from '../fields/shared'
+import {MdCelebration, MdFlag, MdHome, MdLibraryMusic, MdPhoto, MdSearch} from 'react-icons/md'
+import {defineField, defineType} from 'sanity'
+import {excerptField, titleField} from '../fields/shared'
 
 export default defineType({
   name: 'homePage',
   title: 'Página Inicial',
   type: 'document',
   icon: MdHome,
-  groups: baseGroups,
+  groups: [
+    {name: 'hero', title: 'Hero', icon: MdPhoto, default: true},
+    {name: 'blockHighlight', title: 'Bloco em Destaque', icon: MdCelebration},
+    {name: 'mission', title: 'Missão', icon: MdFlag},
+    {name: 'projects', title: 'Projetos', icon: MdLibraryMusic},
+    {name: 'seo', title: 'SEO / Metadados', icon: MdSearch},
+  ],
   fields: [
     titleField('Título da Página (SEO)', 'seo'),
     excerptField(),
@@ -15,7 +21,7 @@ export default defineType({
       name: 'logo',
       title: 'Logo da Hero',
       type: 'image',
-      group: 'content',
+      group: 'hero',
       options: {hotspot: true},
       description: 'Opcional. Se não preenchido, usa o logo definido nas Configurações do Site.',
       fields: [
@@ -39,7 +45,7 @@ export default defineType({
       title: 'Texto Descritivo',
       type: 'text',
       rows: 4,
-      group: 'content',
+      group: 'hero',
       description: 'Texto exibido abaixo do título na seção hero.',
       validation: (Rule) => Rule.required(),
     }),
@@ -47,41 +53,31 @@ export default defineType({
       name: 'primaryCta',
       title: 'Botão Principal',
       type: 'cta',
-      group: 'content',
+      group: 'hero',
     }),
     defineField({
       name: 'secondaryCta',
       title: 'Botão Secundário',
       type: 'cta',
-      group: 'content',
+      group: 'hero',
     }),
     defineField({
-      name: 'socialGallery',
-      title: 'Galeria das Redes Sociais',
-      type: 'array',
-      group: 'content',
-      description: 'Imagens exibidas na seção de redes sociais da home.',
-      options: {layout: 'grid'},
-      of: [
-        defineArrayMember({
-          type: 'image',
-          options: {hotspot: true},
-          fields: [
-            defineField({
-              name: 'alt',
-              title: 'Texto Alternativo',
-              type: 'string',
-              description: 'Descrição da imagem para acessibilidade.',
-            }),
-            defineField({
-              name: 'caption',
-              title: 'Legenda',
-              type: 'string',
-              description: 'Opcional.',
-            }),
-          ],
-        }),
-      ],
+      name: 'blockHighlightSection',
+      title: 'Seção - Bloco em Destaque',
+      type: 'homeBlockHighlightSection',
+      group: 'blockHighlight',
+    }),
+    defineField({
+      name: 'missionSection',
+      title: 'Seção - Missão',
+      type: 'homeMissionSection',
+      group: 'mission',
+    }),
+    defineField({
+      name: 'projectsPreview',
+      title: 'Seção - Projetos em Destaque',
+      type: 'homeProjectsPreview',
+      group: 'projects',
     }),
   ],
 })

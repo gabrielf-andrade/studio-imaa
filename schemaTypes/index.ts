@@ -12,6 +12,9 @@ import featuredImage from './objects/featuredImage'
 import formField from './objects/formField'
 import gallery from './objects/gallery'
 import hero from './objects/hero'
+import homeBlockHighligthtSection from './objects/homeBlockHighligthtSection'
+import homeMissionSection from './objects/homeMissionSection'
+import homeProjectsPreview from './objects/homeProjectsPreview'
 import horizontalRule from './objects/horizontalRule'
 import menu from './objects/menu'
 import menuItem from './objects/menuItem'
@@ -30,6 +33,9 @@ export const schemaTypes = [
   gallery,
   featuredImage,
   horizontalRule,
+  homeBlockHighligthtSection,
+  homeProjectsPreview,
+  homeMissionSection,
   blockContent,
   downloadableFile,
   youtubeEmbed,
