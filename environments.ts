@@ -1,0 +1,3 @@
+export const SANITY_PROJECT_ID = process.env.SANITY_STUDIO_PROJECT_ID!
+export const SANITY_DATASET = process.env.SANITY_STUDIO_DATASET!
+export const SANITY_WEBHOOK_SALT = process.env.SANITY_STUDIO_WEBHOOK_SALT!

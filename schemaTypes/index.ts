@@ -24,7 +24,9 @@ import textWithIllustration from './objects/textWithIllustration'
 import videoFile from './objects/videoFile'
 import youtubeEmbed from './objects/youtubeEmbed'
 
-export const schemaTypes = [
+const documents = [homePage, contactPage, page, siteSettings, transparencySection]
+
+const objects = [
   menu,
   menuItem,
   hero,
@@ -36,7 +38,6 @@ export const schemaTypes = [
   homeBlockHighligthtSection,
   homeProjectsPreview,
   homeMissionSection,
-  blockContent,
   downloadableFile,
   youtubeEmbed,
   videoFile,
@@ -45,9 +46,8 @@ export const schemaTypes = [
   cta,
   formField,
   ctaSection,
-  homePage,
-  contactPage,
-  page,
-  siteSettings,
-  transparencySection,
 ]
+
+const blocks = [blockContent]
+
+export const schemaTypes = [...documents, ...objects, ...blocks]

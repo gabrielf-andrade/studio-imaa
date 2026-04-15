@@ -1,9 +1,10 @@
 import {defineCliConfig} from 'sanity/cli'
+import {SANITY_DATASET, SANITY_PROJECT_ID} from './environments'
 
 export default defineCliConfig({
   api: {
-    projectId: 'ofh08t2n',
-    dataset: 'production',
+    projectId: SANITY_PROJECT_ID,
+    dataset: SANITY_DATASET,
   },
   deployment: {
     /**
@@ -12,6 +13,10 @@ export default defineCliConfig({
      */
     autoUpdates: true,
     appId: 'e6xfk55amzy2kvcyp4ppq93t',
+  },
+  schemaExtraction: {
+    enabled: true,
+    enforceRequiredFields: true,
   },
   typegen: {
     /**

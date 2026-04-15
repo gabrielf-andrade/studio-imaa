@@ -1,76 +1,31 @@
 import {ptBRLocale} from '@sanity/locale-pt-br'
 import {visionTool} from '@sanity/vision'
-import {MdContactPage, MdHome, MdSettings} from 'react-icons/md'
 import {defineConfig} from 'sanity'
 import {media} from 'sanity-plugin-media'
 import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 import {structureTool} from 'sanity/structure'
+import {SANITY_DATASET, SANITY_PROJECT_ID, SANITY_WEBHOOK_SALT} from './environments'
 import {schemaTypes} from './schemaTypes'
-
-const singletonTypes = new Set(['siteSettings', 'homePage', 'contactPage'])
+import {deskStructure, singletonTypes} from './structure/desk-structure'
 
 export default defineConfig({
   name: 'default',
   title: 'studio-imaa',
 
-  projectId: 'ofh08t2n',
-  dataset: 'production',
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
 
   plugins: [
     structureTool({
-      structure: (S) =>
-        S.list()
-          .title('Conteúdo')
-          .items([
-            // Configurações do Site (Singleton)
-            S.listItem()
-              .title('Configurações do Site')
-              .id('siteSettings')
-              .icon(MdSettings)
-              .child(
-                S.document()
-                  .schemaType('siteSettings')
-                  .documentId('siteSettings')
-                  .title('Configurações Gerais'),
-              ),
-            //Página Inicial
-            S.listItem()
-              .title('Página Inicial')
-              .id('homePage')
-              .icon(MdHome)
-              .child(
-                S.document().schemaType('homePage').documentId('homePage').title('Página Inicial'),
-              ),
-            //Página de Contato
-            S.listItem()
-              .title('Página de Contato')
-              .id('contactPage')
-              .icon(MdContactPage)
-              .child(
-                S.document()
-                  .schemaType('contactPage')
-                  .documentId('contactPage')
-                  .title('Página de Contato'),
-              ),
-
-            S.divider(),
-
-            // Lista automática dos outros documentos
-            ...S.documentTypeListItems().filter(
-              (item) =>
-                !['siteSettings', 'homePage', 'contactPage', 'menuItem', 'media.tag'].includes(
-                  item.getId() ?? '',
-                ),
-            ),
-          ]),
+      structure: deskStructure,
     }),
     visionTool(),
     media(),
     ptBRLocale(),
     webhooksTrigger({
       title: 'Atualizar Site',
-      text: 'Fazer build do site na Cloudflare após alterações',
-      encryptionSalt: process.env.SANITY_WEBHOOK_SALT!,
+      text: 'Atualizar site público após alterações',
+      encryptionSalt: SANITY_WEBHOOK_SALT,
     }),
   ],
 
