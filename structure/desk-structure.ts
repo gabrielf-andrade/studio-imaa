@@ -19,6 +19,7 @@ export const deskStructure = (S: StructureBuilder): ListBuilder =>
             .documentId('siteSettings')
             .title('Configurações Gerais'),
         ),
+      S.divider(),
       // Página Inicial
       S.listItem()
         .title('Página Inicial')

@@ -4,6 +4,7 @@ import {defineConfig} from 'sanity'
 import {media} from 'sanity-plugin-media'
 import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 import {structureTool} from 'sanity/structure'
+import {StudioLogo} from './components/StudioLogo'
 import {SANITY_DATASET, SANITY_PROJECT_ID, SANITY_WEBHOOK_SALT} from './environments'
 import {schemaTypes} from './schemaTypes'
 import {deskStructure, singletonTypes} from './structure/desk-structure'
@@ -47,4 +48,5 @@ export default defineConfig({
       return prev
     },
   },
+  icon: StudioLogo,
 })
