@@ -16,6 +16,8 @@ import homeBlockHighligthtSection from './objects/homeBlockHighligthtSection'
 import homeMissionSection from './objects/homeMissionSection'
 import homeProjectsPreview from './objects/homeProjectsPreview'
 import horizontalRule from './objects/horizontalRule'
+import projectShowcaseItem from './objects/projectShowcaseItem'
+import projectShowcaseSection from './objects/projectShowcaseSection'
 import menu from './objects/menu'
 import menuItem from './objects/menuItem'
 import richText from './objects/richText'
@@ -46,6 +48,8 @@ const objects = [
   cta,
   formField,
   ctaSection,
+  projectShowcaseItem,
+  projectShowcaseSection,
 ]
 
 const blocks = [blockContent]

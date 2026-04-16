@@ -55,6 +55,7 @@ export const baseBlockContentMembers = [
     },
   }),
   defineArrayMember({
+    title: 'Imagem',
     type: 'image',
     options: {hotspot: true},
     fields: [
@@ -75,6 +76,7 @@ export const baseBlockContentMembers = [
   defineArrayMember({type: 'downloadableFile'}),
   defineArrayMember({type: 'videoFile'}),
   defineArrayMember({type: 'youtubeEmbed'}),
+  defineArrayMember({type: 'projectShowcaseSection'}),
 ]
 
 /**
