@@ -37,8 +37,8 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Destaque (cor primária)', value: 'primary'},
-          {title: 'Suave (muted)', value: 'muted'},
+          {title: 'Azul (primária)', value: 'primary'},
+          {title: 'Creme (suave / muted)', value: 'muted'},
         ],
         layout: 'radio',
         direction: 'horizontal',

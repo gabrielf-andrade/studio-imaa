@@ -1,5 +1,13 @@
-import {MdLibraryMusic} from 'react-icons/md'
+import {MdLibraryMusic, MdOutlineViewAgenda} from 'react-icons/md'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+
+const PROJECT_ACCENT_LABEL_MAP = {
+  secondary: 'Dourado (secundário)',
+  primary: 'Azul (primário)',
+  primaryLight: 'Azul claro',
+  accent: 'Laranja (acento)',
+  muted: 'Creme (suave / muted)',
+} as const
 
 export default defineType({
   name: 'homeProjectsPreview',
@@ -52,6 +60,7 @@ export default defineType({
           name: 'project',
           title: 'Projeto',
           type: 'object',
+          icon: MdOutlineViewAgenda,
           fields: [
             defineField({
               name: 'title',
@@ -72,10 +81,11 @@ export default defineType({
               type: 'string',
               options: {
                 list: [
-                  {title: 'Amarelo (secundário)', value: 'secondary'},
-                  {title: 'Verde (primário)', value: 'primary'},
-                  {title: 'Verde claro', value: 'primaryLight'},
+                  {title: 'Dourado (secundário)', value: 'secondary'},
+                  {title: 'Azul (primário)', value: 'primary'},
+                  {title: 'Azul claro', value: 'primaryLight'},
                   {title: 'Laranja (acento)', value: 'accent'},
+                  {title: 'Creme (suave / muted)', value: 'muted'},
                 ],
               },
               initialValue: 'secondary',
@@ -84,6 +94,17 @@ export default defineType({
           preview: {
             select: {
               title: 'title',
+              subtitle: 'accent',
+            },
+            prepare({title, subtitle}) {
+              const accentLabel = subtitle
+                ? PROJECT_ACCENT_LABEL_MAP[subtitle as keyof typeof PROJECT_ACCENT_LABEL_MAP]
+                : undefined
+              return {
+                title: title || 'Projeto sem título',
+                subtitle: accentLabel ? `Barra: ${accentLabel}` : 'Barra não definida',
+                media: MdOutlineViewAgenda,
+              }
             },
           },
         }),

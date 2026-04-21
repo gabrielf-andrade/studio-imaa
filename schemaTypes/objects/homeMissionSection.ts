@@ -1,5 +1,12 @@
-import {MdFlag} from 'react-icons/md'
+import {MdFavorite, MdFlag, MdMusicNote, MdPeople, MdStar} from 'react-icons/md'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+
+const PILLAR_MEDIA_MAP = {
+  music: MdMusicNote,
+  heart: MdFavorite,
+  users: MdPeople,
+  star: MdStar,
+} as const
 
 export default defineType({
   name: 'homeMissionSection',
@@ -70,6 +77,7 @@ export default defineType({
           name: 'pillar',
           title: 'Pilar',
           type: 'object',
+          icon: MdStar,
           fields: [
             defineField({
               name: 'icon',
@@ -106,11 +114,12 @@ export default defineType({
               type: 'string',
               options: {
                 list: [
-                  {title: 'Verde (primário)', value: 'primary'},
-                  {title: 'Amarelo (secundário)', value: 'secondary'},
+                  {title: 'Azul (primário)', value: 'primary'},
+                  {title: 'Dourado (secundário)', value: 'secondary'},
                   {title: 'Laranja (acento)', value: 'accent'},
-                  {title: 'Verde claro', value: 'primaryLight'},
-                  {title: 'Amarelo escuro', value: 'secondaryDark'},
+                  {title: 'Azul claro', value: 'primaryLight'},
+                  {title: 'Dourado escuro', value: 'secondaryDark'},
+                  {title: 'Creme (suave / muted)', value: 'muted'},
                 ],
               },
               initialValue: 'primary',
@@ -120,6 +129,14 @@ export default defineType({
             select: {
               title: 'title',
               subtitle: 'icon',
+            },
+            prepare({title, subtitle}) {
+              const media = subtitle ? PILLAR_MEDIA_MAP[subtitle as keyof typeof PILLAR_MEDIA_MAP] : MdStar
+              return {
+                title: title || 'Pilar sem título',
+                subtitle: subtitle ? `Ícone: ${subtitle}` : 'Ícone não definido',
+                media: media || MdStar,
+              }
             },
           },
         }),
