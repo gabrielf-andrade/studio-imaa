@@ -7,7 +7,7 @@ import {structureTool} from 'sanity/structure'
 import {StudioLogo} from './components/StudioLogo'
 import {SANITY_DATASET, SANITY_PROJECT_ID, SANITY_WEBHOOK_SALT} from './environments'
 import {schemaTypes} from './schemaTypes'
-import {deskStructure, singletonTypes} from './structure/desk-structure'
+import {deskStructure, singletonTypes} from './structure/deskStructure'
 
 export default defineConfig({
   name: 'default',
