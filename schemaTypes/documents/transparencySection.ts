@@ -3,12 +3,6 @@ import {MdFolderSpecial, MdPictureAsPdf} from 'react-icons/md'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {baseGroups, excerptField, heroField, slugField, titleField} from '../fields/shared'
 
-const statusMap = {
-  in_progress: 'Em execução',
-  completed: 'Concluído',
-  in_analysis: 'Em análise',
-  pending: 'Pendente',
-}
 
 export default defineType({
   name: 'transparencySection',
@@ -78,31 +72,11 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: 'origin',
-              title: 'Origem / Instrumento Legal',
-              type: 'string',
-              description: 'Ex: "Emenda Parlamentar nº 14080015 – FUNARTE"',
-            }),
-            defineField({
-              name: 'value',
-              title: 'Valor (R$)',
-              type: 'string',
-              description: 'Ex: "R$ 200.000,00"',
-            }),
-            defineField({
-              name: 'status',
-              title: 'Status',
-              type: 'string',
-              options: {
-                list: [
-                  {title: 'Em execução', value: 'in_progress'},
-                  {title: 'Concluído', value: 'completed'},
-                  {title: 'Em análise', value: 'in_analysis'},
-                  {title: 'Pendente', value: 'pending'},
-                ],
-                layout: 'radio',
-              },
-              initialValue: 'in_progress',
+              name: 'content',
+              title: 'Conteúdo do Projeto',
+              type: 'blockContent',
+              description:
+                'Texto livre com dados do projeto, instrumento, valores, vigência e demais informações de transparência.',
             }),
             defineField({
               name: 'documents',
@@ -112,11 +86,10 @@ export default defineType({
             }),
           ],
           preview: {
-            select: {title: 'title', status: 'status'},
-            prepare({title, status}) {
+            select: {title: 'title'},
+            prepare({title}) {
               return {
                 title,
-                subtitle: statusMap[status as keyof typeof statusMap],
                 media: LuFileText,
               }
             },
