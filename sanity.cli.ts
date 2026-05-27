@@ -15,7 +15,7 @@ export default defineCliConfig({
     appId: 'e6xfk55amzy2kvcyp4ppq93t',
   },
   schemaExtraction: {
-    enabled: true,
+    enabled: false,
     enforceRequiredFields: true,
   },
   typegen: {
